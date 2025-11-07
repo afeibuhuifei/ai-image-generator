@@ -39,3 +39,4 @@ temp/
 # API keys and sensitive data
 config.js
 secrets.json
+.vercel
