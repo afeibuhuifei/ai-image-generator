@@ -1,0 +1,14 @@
+uid=1_0 RootWebArea "AI图片生成器" url="http://localhost:3000/"
+  uid=1_1 banner
+    uid=1_2 StaticText "🎨"
+    uid=1_3 heading "AI图片生成器" level="1"
+    uid=1_4 StaticText "基于先进AI技术的图片生成工具"
+  uid=1_5 heading "创建图片" level="2"
+  uid=1_6 StaticText "描述你想要生成的图片内容"
+  uid=1_7 textbox "详细描述你想要的图片，例如：一只可爱的小猫坐在温暖的沙发上，阳光透过窗户洒进来，温馨的家庭氛围..." multiline value="抽象艺术，色彩斑斓的几何图形，现代艺术风格"
+  uid=1_8 button "💡 示例"
+  uid=1_9 button "🗑️ 清空"
+  uid=1_10 button "生成中..." disableable disabled
+  uid=1_11 StaticText "ℹ️"
+  uid=1_12 StaticText "正在生成图片，请稍候..."
+  uid=1_13 button "×"
