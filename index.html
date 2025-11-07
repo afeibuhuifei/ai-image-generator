@@ -8,6 +8,15 @@
 </head>
 <body>
     <div class="app-container">
+        <!-- 用户信息显示 -->
+        <div class="user-info" id="userInfo" style="display: none;">
+            <div>
+                <div class="user-name" id="userName">用户</div>
+                <div class="usage-count" id="usageCount">剩余次数: 0</div>
+            </div>
+            <button class="logout-btn" id="logoutBtn">退出</button>
+        </div>
+
         <div class="main-card">
             <header class="app-header">
                 <h1 class="app-title">AI图片生成器</h1>
@@ -15,6 +24,12 @@
             </header>
 
             <div class="content-area">
+                <!-- 权限提示横幅 -->
+                <div class="usage-limit-banner" id="usageBanner" style="display: none;">
+                    <span class="usage-limit-text" id="usageBannerText"></span>
+                    <a href="/login.html" class="upgrade-btn" id="upgradeBtn">登录</a>
+                </div>
+
                 <div class="input-area">
                     <div class="prompt-section">
                         <div class="section-header">

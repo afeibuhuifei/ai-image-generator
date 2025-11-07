@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - AI图片生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="main-card">
+            <header class="app-header">
+                <h1 class="app-title">AI图片生成器</h1>
+                <p class="app-description">请登录以获得更多使用权限</p>
+            </header>
+
+            <div class="content-area">
+                <div class="login-area">
+                    <form id="loginForm" class="login-form">
+                        <div class="form-group">
+                            <label for="username" class="form-label">用户名</label>
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                class="form-input"
+                                placeholder="请输入用户名"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">密码</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-input"
+                                placeholder="请输入密码"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="login-button">
+                            <span class="button-text">登录</span>
+                            <div class="loading-indicator" style="display: none;">
+                                <div class="spinner"></div>
+                                <span class="loading-text">登录中...</span>
+                            </div>
+                        </button>
+                    </form>
+
+                    <div class="login-info">
+                        <div class="info-card">
+                            <h3 class="info-title">使用权限说明</h3>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <span class="info-label">未登录用户：</span>
+                                    <span class="info-value">每天1次使用权限</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">登录用户：</span>
+                                    <span class="info-value">每天10次使用权限</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="demo-account">
+                            <p class="demo-text">测试账号：</p>
+                            <p class="demo-credentials">用户名：123</p>
+                            <p class="demo-credentials">密码：123</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notification" id="notification" style="display: none;">
+                <div class="notification-content">
+                    <span class="notification-icon" id="notificationIcon"></span>
+                    <span class="notification-text" id="notificationText"></span>
+                </div>
+                <button class="notification-close" id="notificationClose">×</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

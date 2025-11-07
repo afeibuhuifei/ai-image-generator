@@ -1,11 +1,26 @@
 class ModernImageGenerator {
     constructor() {
+        this.currentUser = null;
+        this.usageInfo = null;
         this.initializeElements();
         this.bindEvents();
         this.autoResizeTextarea();
+        this.checkUserSession();
+        this.loadUsageInfo();
     }
 
     initializeElements() {
+        // 用户信息相关
+        this.userInfo = document.getElementById('userInfo');
+        this.userName = document.getElementById('userName');
+        this.usageCount = document.getElementById('usageCount');
+        this.logoutBtn = document.getElementById('logoutBtn');
+
+        // 权限横幅
+        this.usageBanner = document.getElementById('usageBanner');
+        this.usageBannerText = document.getElementById('usageBannerText');
+        this.upgradeBtn = document.getElementById('upgradeBtn');
+
         // 输入相关元素
         this.promptTextarea = document.getElementById('prompt');
         this.exampleBtn = document.getElementById('exampleBtn');
@@ -38,6 +53,9 @@ class ModernImageGenerator {
         this.generateBtn.addEventListener('click', () => this.generateImage());
         this.downloadBtn.addEventListener('click', () => this.downloadImage());
         this.newImageBtn.addEventListener('click', () => this.resetForNewImage());
+
+        // 用户功能按钮
+        this.logoutBtn.addEventListener('click', () => this.logout());
 
         // 输入辅助按钮
         this.exampleBtn.addEventListener('click', () => this.toggleExamples());
@@ -72,6 +90,7 @@ class ModernImageGenerator {
         // 图片加载事件
         this.generatedImage.addEventListener('load', () => {
             this.showNotification('图片生成成功！', 'success');
+            this.loadUsageInfo(); // 重新加载使用情况
         });
 
         this.generatedImage.addEventListener('error', () => {
@@ -128,12 +147,104 @@ class ModernImageGenerator {
         this.exampleSection.style.display = 'none';
     }
 
+    checkUserSession() {
+        const userData = sessionStorage.getItem('currentUser');
+        if (userData) {
+            this.currentUser = JSON.parse(userData);
+            this.updateUserDisplay();
+        }
+    }
+
+    updateUserDisplay() {
+        if (this.currentUser) {
+            this.userInfo.style.display = 'flex';
+            this.userName.textContent = this.currentUser.username;
+        } else {
+            this.userInfo.style.display = 'none';
+        }
+    }
+
+    async loadUsageInfo() {
+        try {
+            const username = this.currentUser?.username;
+            const url = username ? `/api/usage?username=${username}` : '/api/usage?username=anonymous';
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.success) {
+                this.usageInfo = data;
+                this.updateUsageDisplay();
+            }
+        } catch (error) {
+            console.error('获取使用情况失败:', error);
+        }
+    }
+
+    updateUsageDisplay() {
+        if (this.usageInfo) {
+            const { usage, limit, remaining, canUse } = this.usageInfo;
+
+            if (this.currentUser) {
+                this.usageCount.textContent = `剩余次数: ${remaining}/${limit}`;
+            } else {
+                this.usageCount.textContent = `剩余次数: ${remaining}/${limit}`;
+            }
+
+            // 显示或隐藏权限横幅
+            if (!canUse) {
+                this.showUsageBanner();
+            } else {
+                this.hideUsageBanner();
+            }
+        }
+    }
+
+    showUsageBanner() {
+        if (this.currentUser) {
+            this.usageBannerText.textContent = `今日使用次数已用完(${this.usageInfo.limit}次)，请明天再试`;
+            this.upgradeBtn.style.display = 'none';
+        } else {
+            this.usageBannerText.textContent = `未登录用户每日只能使用1次，登录可获得10次权限`;
+            this.upgradeBtn.style.display = 'inline-block';
+        }
+        this.usageBanner.style.display = 'flex';
+    }
+
+    hideUsageBanner() {
+        this.usageBanner.style.display = 'none';
+    }
+
+    logout() {
+        sessionStorage.removeItem('currentUser');
+        sessionStorage.removeItem('token');
+        this.currentUser = null;
+        this.usageInfo = null;
+        this.updateUserDisplay();
+        this.hideUsageBanner();
+        this.loadUsageInfo();
+        this.showNotification('已退出登录', 'info');
+    }
+
     async generateImage() {
         const prompt = this.promptTextarea.value.trim();
 
         if (!prompt) {
             this.showNotification('请输入图片描述', 'error');
             this.promptTextarea.focus();
+            return;
+        }
+
+        // 检查使用权限
+        if (this.usageInfo && !this.usageInfo.canUse) {
+            if (this.currentUser) {
+                this.showNotification(`今日使用次数已用完(${this.usageInfo.limit}次)，请明天再试`, 'error');
+            } else {
+                this.showNotification('未登录用户每日只能使用1次，请登录以获得更多权限', 'error');
+                setTimeout(() => {
+                    window.location.href = '/login.html';
+                }, 2000);
+            }
             return;
         }
 
@@ -144,11 +255,20 @@ class ModernImageGenerator {
         try {
             this.showNotification('正在生成图片，请稍候...', 'info');
 
+            const headers = {
+                'Content-Type': 'application/json',
+            };
+
+            // 如果用户已登录，添加认证信息
+            if (this.currentUser) {
+                const token = sessionStorage.getItem('token');
+                headers['Authorization'] = `Bearer ${token}`;
+                headers['X-Username'] = this.currentUser.username;
+            }
+
             const response = await fetch('/api/generate', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify({ prompt })
             });
 
@@ -157,7 +277,14 @@ class ModernImageGenerator {
             if (data.success) {
                 this.displayImage(data.imageUrl);
             } else {
-                this.showNotification(data.error || '生成图片失败，请重试', 'error');
+                if (data.requireLogin) {
+                    this.showNotification(data.error, 'error');
+                    setTimeout(() => {
+                        window.location.href = '/login.html';
+                    }, 2000);
+                } else {
+                    this.showNotification(data.error || '生成图片失败，请重试', 'error');
+                }
             }
         } catch (error) {
             console.error('生成图片错误:', error);

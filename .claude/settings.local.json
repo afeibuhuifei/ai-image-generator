@@ -9,7 +9,10 @@
       "Bash(git commit:*)",
       "Bash(gh repo create:*)",
       "Bash(npx vercel:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "ask": []

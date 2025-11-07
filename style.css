@@ -417,6 +417,223 @@ body {
     border-color: #d0d0d0;
 }
 
+/* 登录页面样式 */
+.login-area {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    padding: 40px;
+}
+
+.login-form {
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 300;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+    font-weight: 300;
+}
+
+.form-input::placeholder {
+    color: #999;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #666;
+}
+
+.login-button {
+    width: 100%;
+    padding: 20px 40px;
+    background: #000;
+    border: 1px solid #000;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-button:hover:not(:disabled) {
+    background: #333;
+    border-color: #333;
+}
+
+.login-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.login-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.info-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 24px;
+}
+
+.info-title {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #000;
+    margin-bottom: 16px;
+    letter-spacing: -0.2px;
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 300;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 400;
+}
+
+.demo-account {
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    text-align: center;
+}
+
+.demo-text {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 8px;
+    font-weight: 300;
+}
+
+.demo-credentials {
+    font-size: 0.85rem;
+    color: #333;
+    margin: 4px 0;
+    font-family: 'Courier New', monospace;
+    font-weight: 400;
+}
+
+/* 用户信息显示 */
+.user-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 100;
+}
+
+.user-name {
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 300;
+}
+
+.usage-count {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 300;
+}
+
+.logout-btn {
+    padding: 6px 12px;
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #f5f5f5;
+    color: #000;
+    border-color: #999;
+}
+
+/* 权限提示 */
+.usage-limit-banner {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.usage-limit-text {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.upgrade-btn {
+    padding: 8px 16px;
+    background: #000;
+    border: 1px solid #000;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.upgrade-btn:hover {
+    background: #333;
+    border-color: #333;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .main-card {

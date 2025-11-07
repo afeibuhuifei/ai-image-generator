@@ -1,0 +1,17 @@
+uid=3_0 RootWebArea "登录 - AI图片生成器" url="http://localhost:3000/login.html"
+  uid=3_1 banner
+    uid=3_2 heading "AI图片生成器" level="1"
+    uid=3_3 StaticText "请登录以获得更多使用权限"
+  uid=3_4 StaticText "用户名"
+  uid=3_5 textbox "用户名" required
+  uid=3_6 StaticText "密码"
+  uid=3_7 textbox "密码" required
+  uid=3_8 button "登录"
+  uid=3_9 heading "使用权限说明" level="3"
+  uid=3_10 StaticText "未登录用户："
+  uid=3_11 StaticText "每天1次使用权限"
+  uid=3_12 StaticText "登录用户："
+  uid=3_13 StaticText "每天10次使用权限"
+  uid=3_14 StaticText "测试账号："
+  uid=3_15 StaticText "用户名：123"
+  uid=3_16 StaticText "密码：123"
