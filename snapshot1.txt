@@ -1,0 +1,8 @@
+uid=1_0 RootWebArea "AI图片生成器" url="http://localhost:3000/"
+  uid=1_1 banner
+    uid=1_2 heading "AI图片生成器" level="1"
+    uid=1_3 StaticText "输入描述，生成精美图片"
+  uid=1_4 main
+    uid=1_5 StaticText "描述你想要的图片"
+    uid=1_6 textbox "描述你想要的图片" multiline value="一直老虎坐在沙发上，卡通风格"
+    uid=1_7 button "生成图片" disableable disabled

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI图片生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <header class="header">
+                <h1 class="title">AI图片生成器</h1>
+                <p class="subtitle">输入描述，生成精美图片</p>
+            </header>
+
+            <main class="main">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="prompt" class="label">描述你想要的图片</label>
+                        <textarea
+                            id="prompt"
+                            class="prompt-input"
+                            placeholder="例如：一只可爱的猫咪坐在舒适的沙发上，阳光明媚，温馨的氛围"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <button id="generateBtn" class="generate-btn">
+                        <span class="btn-text">生成图片</span>
+                        <div class="loading-spinner" style="display: none;"></div>
+                    </button>
+                </div>
+
+                <div class="result-section" id="resultSection" style="display: none;">
+                    <div class="image-container">
+                        <img id="generatedImage" src="" alt="生成的图片" class="generated-image">
+                        <div class="image-overlay" id="imageOverlay">
+                            <button id="saveBtn" class="save-btn">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                保存图片
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button id="newImageBtn" class="new-image-btn">生成新图片</button>
+                    </div>
+                </div>
+
+                <div class="error-message" id="errorMessage" style="display: none;">
+                    <span class="error-icon">⚠️</span>
+                    <span class="error-text" id="errorText"></span>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
